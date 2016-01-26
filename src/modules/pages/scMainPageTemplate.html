@@ -1,0 +1,25 @@
+<h1>SparkChart Test Page</h1>
+
+<table class="results">
+
+    <tr>
+        <th>Filename</th>
+        <th>Timestamp</th>
+        <th>Number of Points</th>
+        <th>Signature</th>
+        <th>Confidence</th>
+        <th>Download</th>
+    </tr>
+
+    <tr ng-repeat="result in results">
+        <td>{{ result.filename }}</td>
+        <td>{{ result.timestamp }}</td>
+        <td>{{ result.numPoints }}</td>
+        <td>
+            <spark-line data="result.signature"></spark-line>
+        </td>
+        <td>{{ result.confidence }}</td>
+        <td>{{ result.download }}</td>
+    </tr>
+
+</table>

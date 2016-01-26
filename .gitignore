@@ -1,0 +1,14 @@
+node_modules
+build
+dist
+bower_components/
+reports
+*.swp
+.idea/
+.idea/workspace.xml
+.tmp
+.sass-cache
+.DS_Store
+
+src/scripts/*
+src/styles/*
