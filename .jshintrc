@@ -21,5 +21,6 @@
   "white": true,
   "validthis": true,
   "globals": {
+      "d3": true
   }
 }

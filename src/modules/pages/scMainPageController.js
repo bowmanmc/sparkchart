@@ -9,7 +9,7 @@ module.exports = function(ngModule) {
         var results = [];
         var numDays = 100;
         for (i = 0; i < numDays; i++) {
-            ts = moment().subtract((numDays - i)).format('YYYY-MM-DD 12:01:02');
+            ts = moment().subtract((numDays - i), 'days').format('YYYY-MM-DD 12:01:02');
             results.push({
                 timestamp: ts,
                 value: Math.floor(Math.random() * 100 + 1)
@@ -29,35 +29,35 @@ module.exports = function(ngModule) {
             download: 'http://foobarbaz.com'
         }, {
             filename: '20160101120203-FooBarBaz.xml',
-            timestmap: '2016-01-01 12:02:03',
+            timestmap: '2016-01-02 12:02:03',
             numPoints: 167,
             signature: [generateData(), generateData()],
             confidence: 0.75,
             download: 'http://foobarbaz.com'
         }, {
             filename: '20160101120203-FooBarBaz.xml',
-            timestmap: '2016-01-01 12:02:03',
+            timestmap: '2016-01-03 12:02:03',
             numPoints: 84,
             signature: [generateData(), generateData()],
             confidence: 0.73,
             download: 'http://foobarbaz.com'
         }, {
             filename: '20160101120203-FooBarBaz.xml',
-            timestmap: '2016-01-01 12:02:03',
+            timestmap: '2016-01-04 12:02:03',
             numPoints: 968,
             signature: [generateData(), generateData()],
             confidence: 0.64,
             download: 'http://foobarbaz.com'
         }, {
             filename: '20160101120203-FooBarBaz.xml',
-            timestmap: '2016-01-01 12:02:03',
+            timestmap: '2016-01-05 12:02:03',
             numPoints: 245,
             signature: [generateData(), generateData()],
             confidence: 0.55,
             download: 'http://foobarbaz.com'
         }, {
             filename: '20160101120203-FooBarBaz.xml',
-            timestmap: '2016-01-01 12:02:03',
+            timestmap: '2016-01-06 12:02:03',
             numPoints: 763,
             signature: [generateData(), generateData()],
             confidence: 0.53,

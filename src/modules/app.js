@@ -2,6 +2,7 @@
 
 // Global Dependencies
 require('jquery');
+require('d3');
 
 // Angular
 import angular from 'angular';
