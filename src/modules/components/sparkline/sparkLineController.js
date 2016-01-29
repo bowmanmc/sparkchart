@@ -5,12 +5,6 @@ module.exports = function(ngModule) {
 
     ngModule.controller('sparkLineController', function($scope, $element) {
 
-        var margin = {
-               top: 5,
-             right: 10,
-            bottom: 5,
-              left: 10
-        };
         var width = 128;
         var height = 64;
 
@@ -27,14 +21,6 @@ module.exports = function(ngModule) {
                 }))
                 .range([height, 0]);
 
-            // var xAxis = d3.svg.axis()
-            //     .scale(x)
-            //     .orient('bottom');
-            //
-            // var yAxis = d3.svg.axis()
-            //     .scale(y)
-            //     .orient('left');
-
             var line = d3.svg.line()
                 .x(function(d) {
                     return x(moment(d.timestamp, 'YYYY-MM-DD HH:mm:ss').toDate());
@@ -43,33 +29,18 @@ module.exports = function(ngModule) {
 
             var svg = d3.select($element[0]).select('svg');
 
-            // svg.append('g')
-            //     .attr('class', 'x axis')
-            //     .attr('transform', 'translate(0,' + height + ')')
-            //     .call(xAxis);
-            //
-            // svg.append('g')
-            //     .attr('class', 'y axis')
-            //     .call(yAxis)
-            //     .append('text')
-            //         .attr('transform', 'rotate(-90)')
-            //         .attr('y', 6)
-            //         .attr('dy', '.71em')
-            //         .style('text-anchor', 'end')
-            //         .text('Value');
-
             svg.append('path')
                 .datum($scope.data[0])
-                .attr('class', 'line')
+                .attr('class', 'sc-line')
                 .attr('d', line);
         };
 
         var initChart = function() {
             d3.select($element[0]).select('svg')
-                    .attr('width', width + margin.left + margin.right)
-                    .attr('height', height + margin.top + margin.bottom)
-                .append('g')
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                .attr({
+                    'height': height,
+                    'width': width
+                });
 
             // set loading
         };
