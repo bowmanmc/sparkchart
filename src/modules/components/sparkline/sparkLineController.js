@@ -55,11 +55,12 @@ module.exports = function(ngModule) {
 
         var initialize = function() {
             var size = {
-                height: $element[0].offsetHeight,
-                width: $element[0].offsetWidth
+                height: $scope.height || $element[0].offsetHeight || 300,
+                width: $scope.width || $element[0].offsetWidth || 100
             };
 
             console.log('sparkLineController initializing...');
+            console.log('    size: ' + JSON.stringify(size));
             initChart(size);
             renderData(size);
         };

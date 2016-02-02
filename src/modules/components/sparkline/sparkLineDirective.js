@@ -7,8 +7,11 @@ module.exports = function(ngModule) {
             restrict: 'EA',
             templateUrl: 'modules/components/sparkline/sparkLineTemplate.html',
             controller: 'sparkLineController',
+            replace: false,
             scope: {
-                data: '='
+                data: '=',
+                height: '@',
+                width: '@'
             }
         };
     });
