@@ -5,9 +5,6 @@ module.exports = function(ngModule) {
 
     ngModule.controller('sparkLineController', function($scope, $element, ColorService) {
 
-        var width = 128;
-        var height = 64;
-
         var drawLine = function(data, context) {
             var color = ColorService.getScale()[context.index];
             context.svg.append('path')
@@ -17,20 +14,20 @@ module.exports = function(ngModule) {
                 .attr('d', context.lineFunction);
         };
 
-        var renderData = function() {
+        var renderData = function(size) {
             var index = 0;
             $scope.data.forEach(function(dataset) {
                 var x = d3.time.scale()
                     .domain(d3.extent(dataset, function(d) {
                         return moment(d.timestamp, 'YYYY-MM-DD HH:mm:ss').toDate();
                     }))
-                    .range([0, width]);
+                    .range([0, size.width]);
 
                 var y = d3.scale.linear()
                     .domain(d3.extent(dataset, function(d) {
                         return d.value;
                     }))
-                    .range([height, 0]);
+                    .range([size.height, 0]);
 
                 var line = d3.svg.line()
                     .x(function(d) {
@@ -47,19 +44,24 @@ module.exports = function(ngModule) {
             });
         };
 
-        var initChart = function() {
+        var initChart = function(size) {
             d3.select($element[0]).select('svg')
                 .attr({
-                    'height': height,
-                    'width': width
+                    'height': size.height,
+                    'width': size.width
                 });
             // set loading
         };
 
         var initialize = function() {
+            var size = {
+                height: $element[0].offsetHeight,
+                width: $element[0].offsetWidth
+            };
+
             console.log('sparkLineController initializing...');
-            initChart();
-            renderData();
+            initChart(size);
+            renderData(size);
         };
         initialize();
     });
