@@ -11,7 +11,8 @@ module.exports = function(ngModule) {
             scope: {
                 data: '=',
                 height: '@',
-                width: '@'
+                width: '@',
+                scale: '@'
             }
         };
     });

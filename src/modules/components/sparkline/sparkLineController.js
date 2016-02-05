@@ -6,7 +6,8 @@ module.exports = function(ngModule) {
     ngModule.controller('sparkLineController', function($scope, $element, ColorService) {
 
         var drawLine = function(data, context) {
-            var color = ColorService.getScale()[context.index];
+            var color = ColorService.getScale($scope.scale)[context.index];
+            console.log('Color for scale ' + $scope.scale + ' [' + context.index + '] = ' + color);
             context.svg.append('path')
                 .datum(data)
                 .attr('class', 'sc-line')
