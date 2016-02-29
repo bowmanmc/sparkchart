@@ -8,6 +8,10 @@ module.exports = function(ngModule) {
              controller: 'scMainPageController',
             templateUrl: 'modules/pages/scMainPageTemplate.html'
         })
+        .when('/chart', {
+             controller: 'scChartPageController',
+            templateUrl: 'modules/pages/scChartPageTemplate.html'
+        })
         .otherwise({
             redirectTo: '/'
         });
