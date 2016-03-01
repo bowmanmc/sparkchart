@@ -55,13 +55,20 @@ module.exports = function(ngModule) {
         };
 
         var initialize = function() {
+            //console.log('  this: ' + $element[0].offsetHeight);
+            //console.log('parent: ' + $element[0].parentElement.offsetHeight);
+            /*
+             * Sizing here is a little complicated. Width/Height specified by
+             * the user of the tag gets priority. Then, we auto-size to the
+             * containing element. Then, we just guess at 100x300.
+             */
             var size = {
-                height: $scope.height || $element[0].offsetHeight || 300,
-                width: $scope.width || $element[0].offsetWidth || 100
+                height: $scope.height || $element[0].parentElement.offsetHeight || 300,
+                width: $scope.width || $element[0].parentElement.offsetWidth || 100
             };
 
-            console.log('sparkLineController initializing...');
-            console.log('    size: ' + JSON.stringify(size));
+            //console.log('sparkLineController initializing...');
+            //console.log('    size: ' + JSON.stringify(size));
             initChart(size);
             renderData(size);
         };
