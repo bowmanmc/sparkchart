@@ -1,6 +1,12 @@
 
 .sc-line {
     fill: none;
-    //stroke: #009;
     stroke-width: 1px;
+}
+
+.sc__line-axis path,
+.sc__line-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }

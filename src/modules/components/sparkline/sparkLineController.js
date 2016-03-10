@@ -16,33 +16,73 @@ module.exports = function(ngModule) {
         };
 
         var renderData = function(size) {
+
+            var margin = 0;
+            if (size.width > 200 && size.height > 100) {
+                margin = 20;
+            }
+
+            // build up domain/range
+            var allData = [];
+            $scope.data.forEach(function(dataset) {
+                allData = allData.concat(dataset);
+            });
+
+            var x = d3.time.scale()
+                .domain(d3.extent(allData, function(d) {
+                    return moment(d.timestamp, 'YYYY-MM-DD HH:mm:ss').toDate();
+                }))
+                .range([0, size.width - margin]);
+
+            var y = d3.scale.linear()
+                .domain(d3.extent(allData, function(d) {
+                    return d.value;
+                }))
+                .range([size.height - margin, 0]);
+
+            var line = d3.svg.line()
+                .x(function(d) {
+                    return x(moment(d.timestamp, 'YYYY-MM-DD HH:mm:ss').toDate());
+                })
+                .y(function(d) { return y(d.value); });
+
+            // Draw the axes
+            if (size.width > 200 && size.height > 100) {
+                console.log('Drawing axis...');
+                var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient('bottom');
+
+                var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient('left');
+
+                d3.select($element[0]).select('.sc__line-axisx')
+                    .attr('transform', 'translate(0, ' + (size.height - margin) + ')')
+                    .call(xAxis);
+
+                d3.select($element[0]).select('.sc__line-axisy')
+                    .call(yAxis)
+                .append('text')
+                    .attr('transform', 'rotate(-90)')
+                    .attr('y', 6)
+                    .attr('dy', '.71em')
+                    .style('text-anchor', 'end')
+                    .text('');
+            }
+
+            // Draw the lines
             var index = 0;
             $scope.data.forEach(function(dataset) {
-                var x = d3.time.scale()
-                    .domain(d3.extent(dataset, function(d) {
-                        return moment(d.timestamp, 'YYYY-MM-DD HH:mm:ss').toDate();
-                    }))
-                    .range([0, size.width]);
-
-                var y = d3.scale.linear()
-                    .domain(d3.extent(dataset, function(d) {
-                        return d.value;
-                    }))
-                    .range([size.height, 0]);
-
-                var line = d3.svg.line()
-                    .x(function(d) {
-                        return x(moment(d.timestamp, 'YYYY-MM-DD HH:mm:ss').toDate());
-                    })
-                    .y(function(d) { return y(d.value); });
-
                 drawLine(dataset, {
                     index: index,
                     lineFunction: line,
+                    margin: margin,
                     svg: d3.select($element[0]).select('svg')
                 });
                 index++;
             });
+
         };
 
         var initChart = function(size) {
