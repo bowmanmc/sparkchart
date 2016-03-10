@@ -10,6 +10,7 @@ module.exports = function(ngModule) {
             replace: false,
             scope: {
                 data: '=',
+                axis: '@',
                 height: '@',
                 width: '@',
                 scale: '@'

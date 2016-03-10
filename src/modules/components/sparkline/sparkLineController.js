@@ -47,7 +47,7 @@ module.exports = function(ngModule) {
                 .y(function(d) { return y(d.value); });
 
             // Draw the axes
-            if (size.width > 200 && size.height > 100) {
+            if (size.width > 200 && size.height > 100 && $scope.axis) {
                 console.log('Drawing axis...');
                 var xAxis = d3.svg.axis()
                     .scale(x)
@@ -78,7 +78,7 @@ module.exports = function(ngModule) {
                     index: index,
                     lineFunction: line,
                     margin: margin,
-                    svg: d3.select($element[0]).select('svg')
+                    svg: d3.select($element[0]).select('.sc__line')
                 });
                 index++;
             });
